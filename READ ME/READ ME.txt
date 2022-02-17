@@ -1,0 +1,99 @@
+|--------------------------------------------------------------------|
+|                           Utilisation                              |
+|--------------------------------------------------------------------|
+
+Le projet utilise différent langage.
+Nous utilisons :
+ - Pour la structure des pages Web : l'HTML
+ - Pour la mise en forme des pages : du CSS
+ - Pour la communication au serveur : Ajax avec le langage JavaScript
+ - Pour traiter les données dans la base de données : du php
+
+|--------------------------------------------------------------------|
+|                           Préparations                             |
+|--------------------------------------------------------------------|
+
+1. Récupérer le fichier compressé.
+2. Extraire les dossiers du fichier compressé.
+3. Déposer le fichier dans le répertoire "WWW" du serveur / hébergeur. Attention modifier le chemin vers vérif, envoyé dans le mail.
+4. Utiliser l'export présent dans le fichier : "db_network_project.sql" afin de crée les tables.
+5. Veillez à ce que dans les pages ".php" l'objet "PDO" fait bien référence à la base de données crée précédement.
+
+
+|--------------------------------------------------------------------|
+|                          Fonctionnalités                           |
+|--------------------------------------------------------------------|
+
+
+|-------------------   Connexion de compte   ------------------------|
+
+Lecture de la base de données :
+  - Vérification des logs
+  - Vérification de la confirmation du compte
+  - Blocage de compte 3 minutes : si mauvais mot de passe 3 fois
+
+|--------------------   Création de compte   ------------------------|
+
+Écriture sur base de données :
+  - Intégration d'un email
+  - Intégration d'un mot de passe hashé
+  - Intégration d'un pseudo
+  - Création d'une clé de confirmation de compte
+  - Création / Gestion d'un statut de confirmation de mail
+
+Envoie de mail :
+  - Écriture d'un mail avec clé de confirmation du compte (enregistrer dans la base de données)
+  - Envoie d'un mail à l'adresse du compte et avec une adresse mail
+
+Reception du mail :
+  - Le mail reçu possède un lien vers une page traitant le compte de l'utilisateur
+  - Permet de passer le compte de l'utilisateur en "confirmé"
+
+Filtre de création :
+  - L'utilisateur est obligé d'utiliser une forme d'adresse mail particulière (-> Regex = Expression Régulière)
+  - Utilisation d'un mot de passe complexe (-> Regex)
+  - Obligation d'entrer des valeurs dans tout le formulaire
+  - Pas de connexion en cas de non confirmation de l'email
+  - Pas de connexion pendant 3 min après 3 echec de mot de passe
+
+
+|------------------------    Web Chat   -----------------------------|
+
+Écriture sur base de données :
+  - Intégration des messages dans la base de données
+  - Ordonnancement des datas de la table messages
+  - Utilisation d'Ajax (Permet de refresh et communication au serveur)
+
+
+|--------------------------------------------------------------------|
+|                           Explications                             |
+|--------------------------------------------------------------------|
+
+
+|--------------------------   chat.php   ---------------------------|
+
+Page HTML du chat
+
+|--------------------------   hander.php   ---------------------------|
+
+Page contenant manipulation SQL du chat.php
+
+|--------------------   envyer_des_mails.php   ----------------------|
+
+Page de test pour vérifier l'envoie de mail
+
+|------------------------   login.php   -------------------------|
+
+Page permettant de se connecter
+
+|-----------------------   logout.php   ------------------------|
+
+Page qui fait juste une déconnexion et qui redirige à la page de login.php
+
+|-----------------------   register.php   ------------------------|
+
+Page du formulaire d'inscription
+
+|--------------------------   verif.php   ---------------------------|
+
+Page qui vérifie la validité d'un email pour rediriger soit en login.php soit en chat.php
